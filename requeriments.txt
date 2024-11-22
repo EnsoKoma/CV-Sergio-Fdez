@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# 1. Instalar dependencias desde requirements.txt
+echo "Instalando dependencias..."
+pip install -r requirements.txt || { echo "Error al instalar dependencias."; exit 1; }
+
+# 2. Configurar clave de OpenAI como variable de entorno
+echo "Configurando la clave de OpenAI..."
+export OPENAI_API_KEY="tu-clave-aqui"
+
+# Confirmar que la clave de OpenAI está configurada correctamente
+if [ -z "$OPENAI_API_KEY" ]; then
+    echo "Error: No se configuró la clave de OpenAI."
+    exit 1
+else
+    echo "Clave de OpenAI configurada correctamente."
+fi
+
+# 3. Limpiar archivos temporales (como imágenes y PDFs generados)
+echo "Eliminando archivos temporales..."
+rm -f /tmp/*.png /tmp/*.pdf || { echo "Error al eliminar archivos temporales."; exit 1; }
+echo "Archivos temporales eliminados."
+
+# 4. Iniciar la aplicación de Streamlit
+echo "Iniciando la aplicación de Streamlit..."
+streamlit run chatbot_cv.py || { echo "Error al iniciar la aplicación."; exit 1; }
