@@ -1,5 +1,5 @@
 import streamlit as st
-from fpdf import FPDF
+from fpdf2 import FPDF
 import pyttsx3  # Para Text-to-Speech
 import openai  # API de OpenAI
 import matplotlib.pyplot as plt
